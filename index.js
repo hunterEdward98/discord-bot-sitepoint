@@ -1,25 +1,34 @@
+// Run dotenv
 require('dotenv').config();
+
 const Discord = require('discord.js');
-const bot = new Discord.Client();
-const TOKEN = process.env.TOKEN;
+const client = new Discord.Client();
 
-bot.login(TOKEN);
-
-bot.on('ready', () => {
-  console.info(`Logged in as ${bot.user.tag}!`);
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
 });
+client.on('message', msg => {
+  if (msg.content === 'casual') {
+    msg.reply('https://youtu.be/xHP2GgxYddY?list=PLSkW9yhFguFRP0FZbD3W1_aY1gzYS9KBl');
+  }
 
-bot.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('pong');
-    msg.channel.send('pong');
+  if (msg.content === 'boss') {
+    msg.reply('https://www.youtube.com/playlist?list=PLtVWk0ZeBy0PNRxOgQv5pBZ8zmt9lAlFs');
+  }
 
-  } else if (msg.content.startsWith('!kick')) {
-    if (msg.mentions.users.size) {
-      const taggedUser = msg.mentions.users.first();
-      msg.channel.send(`You wanted to kick: ${taggedUser.username}`);
-    } else {
-      msg.reply('Please tag a valid user!');
-    }
+  if (msg.content === 'dungeon') {
+    msg.reply('https://youtu.be/FBaI2bwnHGI');
+  }
+
+  if (msg.content === 'combat') {
+    msg.reply('https://www.youtube.com/watch?v=tigBxYfHfH4&list=PLymPg-Cc86_ZY86xXdAjnx-Nzaa3arIqe');
+  }
+  if (msg.content === 'commands') {
+    msg.reply('casual: \nsend casual music playlist');
+    msg.reply('dungeon:\n send dungeon ambient playlist');
+    msg.reply('combat:\n send combat music playlist');
+    msg.reply('boss:\n send boss fight playlist');
   }
 });
+
+client.login(process.env.DISCORD_TOKEN);

@@ -9,7 +9,19 @@
   "author": "Michiel Mulders",
   "license": "ISC",
   "dependencies": {
+    "discord": "^0.8.2",
     "discord.js": "^11.5.1",
-    "dotenv": "^8.2.0"
-  }
+    "dotenv": "^8.2.0",
+    "ffmpeg": "0.0.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hunterEdward98/discord-bot-sitepoint.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/hunterEdward98/discord-bot-sitepoint/issues"
+  },
+  "homepage": "https://github.com/hunterEdward98/discord-bot-sitepoint#readme"
 }
