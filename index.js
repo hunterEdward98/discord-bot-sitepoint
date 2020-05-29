@@ -13,11 +13,13 @@ client.once(`reconnecting`, () => {
 });
 client.once(`disconnect`, () => {
   console.log(`Disconnect!`);
-})
-let NICKNAME = 'music_bot';
+});
 client.on('message', async msg => {
   const command = msg.content.toLowerCase();
   if (msg.author.bot) { return; }
+  /*
+    for every condition in DnD, have a command. Have the bot return what the condition means for the player.
+  */
   if (command.startsWith('exhausted')) {
     msg.channel.send(`1. Disadvantage on Ability Checks\n2. Speed Halved\n3. Disadvantage on Attack rolls and Saving throws\n4. Hit point maximum halved\n5. Speed reduced to 0\n6. Death `);
   }
@@ -86,9 +88,14 @@ client.on('message', async msg => {
     msg.channel.send(`A blinded creature can’t see and automatically fails any ability check that requires sight.\n
     Attack rolls against the creature have advantage, and the creature’s Attack rolls have disadvantage.`);
   }
+
+
+  //show a list of conditions in DnD
   if(command.includes('condition')){
     msg.channel.send('LIST OF CONDITIONS:\nblinded\ncharmed\ndeafened\nfrightened\ngrappled\nincapacitated\ninvisible\nparalyzed\npetrified\npoisoned\nprone\nrestrained\nstunned\nunconscious\nexhausted');
   }
+
+  //hype me up
   if (command.includes('shut up')) {
     let message = "yeah, shut up";
     if (command.includes('bauder')) {
@@ -96,9 +103,15 @@ client.on('message', async msg => {
     }
     msg.channel.send(`${message}!`)
   }
+  if (command.startsWith('oh boy')) {
+    msg.channel.send('oh boy indeed');
+  }
+  //this is a joke. not actually a pedo
   if (command.includes('loli')) {
     msg.channel.send('https://pedo.help');
   }
+
+  //if someone's name is stated, @their_character_name
   if (command.includes('bauder')) {
     msg.channel.send('@shiro');
   }
@@ -117,6 +130,8 @@ client.on('message', async msg => {
   if (command.includes('bryce')) {
     msg.channel.send('@yaza');
   }
+
+  //give me the playlist for X:
   if (command.includes('casual')) {
     msg.channel.send('!play https://youtu.be/xHP2GgxYddY?list=PLSkW9yhFguFRP0FZbD3W1_aY1gzYS9KBl');
   }
@@ -129,14 +144,16 @@ client.on('message', async msg => {
   if (command.includes('combat')) {
     msg.channel.send('!play https://www.youtube.com/watch?v=tigBxYfHfH4&list=PLymPg-Cc86_ZY86xXdAjnx-Nzaa3arIqe');
   }
-  if (command.startsWith('oh boy')) {
-    msg.channel.send('oh boy indeed');
-  }
+  
+  //display the kill list that was found in my campaign
   if (command.includes('kill list')) {
     msg.channel.send(`DEAD:\n Krioleeg Prujot\n Shantel Samson\n Sengart Todina \n Benjamin Sandin\n\nALIVE AS FAR AS YOU KNOW:\n Chelsey Stramble\n Karl Fredrickson\n Charles Damekross\n Shelby Worgslayer\n Sossiree Kroni\n Beloz`)
   }
-  else if (command.includes('commands')) {
+
+  //commands = show commands
+  if (command.includes('commands')) {
     msg.channel.send(`CONDITIONS: \nsends the list of condition commands\n\n`);
+    msg.channel.send(`KILL LIST: \ndisplay the kill list`);
     msg.channel.send(`NAME_OF_PERSON: \nsends who they play\n\n`);
     msg.channel.send(`SHUT UP: \ntells them to shut up\n ALSO TRY: shut up, bauder\n\n\n`);
     msg.channel.send(`LOLI: \nsends link to pedo.help\n\n`);
@@ -145,19 +162,17 @@ client.on('message', async msg => {
     msg.channel.send('COMBAT:\n send combat music playlist\n\n');
     msg.channel.send('BOSS:\n send boss fight playlist\n\n');
   }
+  //change bot nickname
+
   else if (command.startsWith('nickname')) {
     let words = msg.content.split(" ");
     if (words[1]) {
-      let wordsFiltered = words.filter((word) => (word !== 'nickname'));
-      let mToSend = '';
-      for (word of wordsFiltered) {
-        mToSend += `${word} `
-      }
-      msg.channel.send(`YOU HAVE SET MY NICKNAME TO:${mToSend}.`);
-      NICKNAME = mToSend;
+      if (!msg.guild.me.hasPermission('MANAGE_NICKNAMES')) return msg.channel.send('I don\'t have permission to change my nickname!');
+      msg.guild.me.setNickname(msg.content.replace('nickname', ''));
+      msg.channel.send(`YOU HAVE SET MY NICKNAME TO:${msg.content.replace('nickname', '')}.`);
     }
     else {
-      msg.channel.send(`My nickname is ${NICKNAME}. if you would like to change it, say nickname, then what you wish it to be`);
+      msg.channel.send(`My nickname is ${msg.guild.me.nickname}. if you would like to change it, say nickname, then what you wish it to be`);
     }
   }
 });
