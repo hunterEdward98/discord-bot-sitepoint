@@ -89,9 +89,6 @@ client.on('message', async msg => {
   if(command.includes('condition')){
     msg.channel.send('LIST OF CONDITIONS:\nblinded\ncharmed\ndeafened\nfrightened\ngrappled\nincapacitated\ninvisible\nparalyzed\npetrified\npoisoned\nprone\nrestrained\nstunned\nunconscious\nexhausted');
   }
-  if (command.includes('casual')) {
-    msg.channel.send('!play https://youtu.be/xHP2GgxYddY?list=PLSkW9yhFguFRP0FZbD3W1_aY1gzYS9KBl');
-  }
   if (command.includes('shut up')) {
     let message = "yeah, shut up";
     if (command.includes('bauder')) {
@@ -119,6 +116,9 @@ client.on('message', async msg => {
   }
   if (command.includes('bryce')) {
     msg.channel.send('@yaza');
+  }
+  if (command.includes('casual')) {
+    msg.channel.send('!play https://youtu.be/xHP2GgxYddY?list=PLSkW9yhFguFRP0FZbD3W1_aY1gzYS9KBl');
   }
   if (command.includes('boss')) {
     msg.channel.send('!play https://www.youtube.com/playlist?list=PLtVWk0ZeBy0PNRxOgQv5pBZ8zmt9lAlFs');
