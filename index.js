@@ -99,7 +99,7 @@ client.on('message', async msg => {
   if (command.includes('shut up')) {
     let message = "yeah, shut up";
     if (command.includes('bauder')) {
-      message += (' bitch');
+      message += (' boi');
     }
     msg.channel.send(`${message}!`)
   }
